@@ -1,4 +1,4 @@
-@Id
+    @Id
     @GeneratedValue(generator = "account_generator")
     @SequenceGenerator(
             name = "account_generator",
