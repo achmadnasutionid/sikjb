@@ -22,13 +22,13 @@ public class ManagerController {
     @RequestMapping("/manager")
     public String ManagerList(Model model) {
         model.addAttribute("manager", managerService.listManager());
-        return "manager";
+        return "list/manager";
     }
 
     @RequestMapping(value = "/manager/create", method = RequestMethod.GET)
     public String showFormManager(Model model) {
         model.addAttribute("manager", new Manager());
-        return "formManager";
+        return "form/formManager";
     }
 
     @RequestMapping(value = "/manager/create", method = RequestMethod.POST)
@@ -40,7 +40,7 @@ public class ManagerController {
     @RequestMapping(value = "/manager/edit/{managerId}", method = RequestMethod.GET)
     public String showFormEditManager(Model model, @PathVariable Long managerId) {
         model.addAttribute("manager", managerService.getManagerById(managerId));
-        return "formManager";
+        return "form/formManager";
     }
 
     @RequestMapping(value = "/manager/delete/{managerId}", method = RequestMethod.GET)

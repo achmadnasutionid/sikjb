@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sikjb.model.Kasir;
-import com.sikjb.services.KasirServices;
+import com.sikjb.service.KasirService;
 
 @Service
-public class KasirDao implements KasirServices {
+public class KasirDao implements KasirService {
 
 	private EntityManagerFactory emf;
 	
