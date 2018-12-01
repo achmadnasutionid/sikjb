@@ -18,13 +18,14 @@ public class Kasir {
 
 	private String nik;
 	
-	public Long getId() {
+	public Long getKasirById() {
 		return Id;
 	}
 
 	public void setId(Long id) {
 		Id = id;
 	}
+
 
 	public String getName() {
 		return name;
