@@ -1,8 +1,0 @@
-    @Id
-    @GeneratedValue(generator = "account_generator")
-    @SequenceGenerator(
-            name = "account_generator",
-            sequenceName = "account_generator",
-            initialValue = 1
-    )
-    private Long Id;

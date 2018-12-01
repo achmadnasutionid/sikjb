@@ -1,25 +1,20 @@
 package com.sikjb.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "inventory")
 public class Inventory {
 
 	@Id
-	@GeneratedValue(generator = "account_generator")
-	@SequenceGenerator(name = "account_generator", sequenceName = "account_generator", initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
-	private String nama;
+	private String name;
 	
-	private Integer jumlah;
+	private Integer stock;
 	
-	private Long harga;
+	private Long price;
 
 	public Long getId() {
 		return Id;
@@ -29,29 +24,28 @@ public class Inventory {
 		Id = id;
 	}
 
-	public String getNama() {
-		return nama;
+
+	public String getName() {
+		return name;
 	}
 
-	public void setNama(String nama) {
-		this.nama = nama;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Integer getJumlah() {
-		return jumlah;
+	public Integer getStock() {
+		return stock;
 	}
 
-	public void setJumlah(Integer jumlah) {
-		this.jumlah = jumlah;
+	public void setStock(Integer stock) {
+		this.stock = stock;
 	}
 
-	public Long getHarga() {
-		return harga;
+	public Long getPrice() {
+		return price;
 	}
 
-	public void setHarga(Long harga) {
-		this.harga = harga;
+	public void setPrice(Long price) {
+		this.price = price;
 	}
-
-	
 }
