@@ -5,14 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "kasir")
 public class Kasir {
-	
+
 	@Id
-	@GeneratedValue(generator = "kasir_generator")
-	@SequenceGenerator(
-			name = "kasir_generator",
-			sequenceName = "kasir_generator",
-			initialValue = 1
-	)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
 	private String name;
@@ -21,7 +16,7 @@ public class Kasir {
 
 	private String telephone;
 
-	private Integer nik;
+	private String nik;
 	
 	public Long getKasirById() {
 		return Id;
@@ -31,15 +26,16 @@ public class Kasir {
 		Id = id;
 	}
 
-	public String getKasirByName() {
+
+	public String getName() {
 		return name;
 	}
 
-	public void setNama(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getKasirByAddress() {
+	public String getAddress() {
 		return address;
 	}
 
@@ -47,7 +43,7 @@ public class Kasir {
 		this.address = address;
 	}
 
-	public String getKasirByTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
@@ -55,11 +51,11 @@ public class Kasir {
 		this.telephone = telephone;
 	}
 
-	public Integer geKasirBytNik() {
+	public String getNik() {
 		return nik;
 	}
 
-	public void setNik(Integer nik) {
+	public void setNik(String nik) {
 		this.nik = nik;
 	}
 

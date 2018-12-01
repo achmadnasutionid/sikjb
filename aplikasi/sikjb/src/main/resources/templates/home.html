@@ -1,13 +1,121 @@
-<!--nama file	: home.html
-	nim 		: 11S16054
-	kelas		: 13TI02-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-<meta charset="ISO-8859-1">
-<title></title>
+	<title>Manager Koperasi</title>
+	<!-- Bootstrap core CSS -->
+	<link th:href="@{/css/bootstrap.css}" rel="stylesheet" media="screen"/>
+	<!-- Custom styles for this template -->
+	<link th:href="@{/css/starter-template.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
-	<h1>Welcome Sistem Informasi Koperasi Jual-Beli</h1>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+
+			</button>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="/">Home</a></li>
+				<li><a href="/transaksi">Transaksi</a></li>
+				<li><a href="/laporan">Laporan</a></li>
+				<li><a href="/kasir">Kasir</a></li>
+				<li><a href="/manager">Manager</a> </li>
+
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="">Logout</a></li>
+
+			</ul>
+
+		</div><!--/.nav-collapse -->
+
+	</div>
+</nav>
+<div class="site-index">
+
+	<div class="jumbotron">
+		<h1 style="font-family: 'Century Gothic', serif" align="center">Welcome to SIKJB!</h1>
+
+		<p style="font-family: 'Century Gothic', serif" class="lead" align="center">Sistem Informasi Koperasi Jual Beli.</p>
+
+	</div>
+
+	<div class="body-content" style="text-align: center">
+
+		<div class="row">
+			<div class="well col-md-4">
+				<h1><span><i class="glyphicon glyphicon-book"></i></span></h1>
+
+				<h2 style="font-family: 'Century Gothic', serif" class="lead">New Transaksi</h2>
+
+				<p>Catat segala transaksi yang dilakukan ya!.</p>
+
+				<p style="font-family: 'Century Gothic', serif" class="lead"><a class="btn btn-default" href="/">Catat &raquo;</a></p>
+			</div>
+			<div class="well col-md-4">
+				<h1><span><i class="glyphicon glyphicon-file"></i></span></h1>
+
+				<h2 style="font-family: 'Century Gothic', serif" class="lead">Make Laporan</h2>
+
+				<p>Jangan lupa untuk membuat laporan harian dari segala transaksi yang dilakukan!.</p>
+
+				<p style="font-family: 'Century Gothic', serif" class="lead"><a class="btn btn-default" href="/">Buat &raquo;</a></p>
+			</div>
+			<div class="well col-md-4">
+
+				<h1><span><i class="glyphicon glyphicon-folder-open"></i></span></h1>
+
+				<h2 style="font-family: 'Century Gothic', serif" class="lead">List of Laporan</h2>
+
+				<p>Daftar laporan harian tercatat disini</p>
+
+				<p style="font-family: 'Century Gothic', serif" class="lead"><a class="btn btn-default" href="/laporan">Check &raquo;</a></p>
+			</div>
+		</div>
+	</div>
+	<div class="body-content" style="text-align: center">
+		<div class="row">
+			<div class="well col-md-4">
+				<h1><span><i class="glyphicon glyphicon-user"></i></span></h1>
+
+				<h2 style="font-family: 'Century Gothic', serif" class="lead">Kasir</h2>
+
+				<p>Lakukan CRUD pada kasir disini!.</p>
+
+				<p style="font-family: 'Century Gothic', serif" class="lead"><a class="btn btn-default" href="/kasir">CRUD &raquo;</a></p>
+			</div>
+			<div class="well col-md-4">
+				<h1><span><i class="glyphicon glyphicon-oil"></i></span></h1>
+
+				<h2 style="font-family: 'Century Gothic', serif" class="lead">Inventory</h2>
+
+				<p>Lakukan CRUD pada inventory disini!.</p>
+
+				<p style="font-family: 'Century Gothic', serif" class="lead"><a class="btn btn-default" href="/inventory">CRUD &raquo;</a></p>
+			</div>
+			<div class="well col-md-4">
+
+				<h1><span><i class="glyphicon glyphicon-briefcase"></i></span></h1>
+
+				<h2 style="font-family: 'Century Gothic', serif" class="lead">Manager</h2>
+
+				<p>Lakukan CRUD pada manager disini!.</p>
+
+				<p style="font-family: 'Century Gothic', serif" class="lead"><a class="btn btn-default" href="/inventory">CRUD &raquo;</a></p>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
