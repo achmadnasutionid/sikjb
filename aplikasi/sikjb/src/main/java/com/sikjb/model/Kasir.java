@@ -47,11 +47,11 @@ public class Kasir {
 		this.alamat = alamat;
 	}
 
-	public Integer getTelepon() {
+	public String getTelepon() {
 		return telepon;
 	}
 
-	public void setTelepon(Integer telepon) {
+	public void setTelepon(String telepon) {
 		this.telepon = telepon;
 	}
 
