@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sikjb.model.Inventory;
-import com.sikjb.services.InventoryService;
+import com.sikjb.service.InventoryService;
 
 @Service
 public class InventoryDao implements InventoryService {
@@ -38,19 +38,19 @@ public class InventoryDao implements InventoryService {
 		}
 		
 		@Override
-		public void hapusInventory(Integer id) {
+		public void deleteInventory(Long inventoryId) {
 			
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
-			em.remove(em.find(Inventory.class,id));
+			em.remove(em.find(Inventory.class, inventoryId));
 			em.getTransaction().commit();
 		}
 		
 		@Override
-		public Inventory getId(Integer id) {
+		public Inventory getInventoryById(Long inventoryId) {
 			
 			EntityManager em = emf.createEntityManager();
-			return em.find(Inventory.class,id);
+			return em.find(Inventory.class,inventoryId);
 		}
 		
 		

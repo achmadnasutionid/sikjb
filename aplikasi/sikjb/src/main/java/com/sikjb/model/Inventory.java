@@ -24,7 +24,6 @@ public class Inventory {
 		Id = id;
 	}
 
-
 	public String getName() {
 		return name;
 	}

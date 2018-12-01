@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sikjb.model.Inventory;
-import com.sikjb.services.InventoryService;
+import com.sikjb.service.InventoryService;
 
 @Controller
 public class InventoryContoller {
@@ -26,30 +26,30 @@ public class InventoryContoller {
 		@RequestMapping("/inventory")
 		public String InventoryList(Model model) {
 			model.addAttribute("inventory", inventoryService.listInventory());
-			return "inventory";
+			return "list/inventory";
 		}
 		
 		@RequestMapping(value = "/inventory/create", method = RequestMethod.GET)
-		public String tampilkanForm(Model model) {
+		public String showFormInventory(Model model) {
 			model.addAttribute("inventory", new Inventory());
-			return "FormInventory";
+			return "form/formInventory";
 		}
 		
 		@RequestMapping(value = "/inventory/create", method = RequestMethod.POST)
-		public String simpanDataInventory(Model model, Inventory inventory) {
+		public String saveFormInventory(Model model, Inventory inventory) {
 			model.addAttribute("inventory", inventoryService.saveOrUpdate(inventory));
-			return "redirect:/Inventory";
+			return "redirect:/inventory";
 		}
 		
-		@RequestMapping(value = "/inventory/edit/{id}", method = RequestMethod.GET)
-		public String editInventory(@PathVariable Integer id, Model model) {
-			model.addAttribute("inventory",inventoryService.getId(id));
-			return "FormInventory";
+		@RequestMapping(value = "/inventory/edit/{inventoryId}", method = RequestMethod.GET)
+		public String showFormEditInventory(@PathVariable Long inventoryId, Model model) {
+			model.addAttribute("inventory",inventoryService.getInventoryById(inventoryId));
+			return "form/formInventory";
 		}
 		
-		@RequestMapping(value = "/inventory/hapus/{id}", method = RequestMethod.GET)
-		public String hapusinventory(@PathVariable Integer id) {
-			inventoryService.hapusInventory(id);
-			return "redirect:/Inventory";
+		@RequestMapping(value = "/inventory/delete/{inventoryId}", method = RequestMethod.GET)
+		public String deleteInventory(@PathVariable Long inventoryId) {
+			inventoryService.deleteInventory(inventoryId);
+			return "redirect:/inventory";
 		}
 }
