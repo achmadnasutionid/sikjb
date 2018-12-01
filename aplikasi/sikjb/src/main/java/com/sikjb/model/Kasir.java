@@ -1,24 +1,27 @@
 package com.sikjb.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "kasir")
 public class Kasir {
 	
-	 @Id
-	    @GeneratedValue(generator = "kasir_generator")
-	    @SequenceGenerator(
-	            name = "kasir_generator",
-	            sequenceName = "kasir_generator",
-	            initialValue = 1
-	    )
+	@Id
+	@GeneratedValue(generator = "kasir_generator")
+	@SequenceGenerator(
+			name = "kasir_generator",
+			sequenceName = "kasir_generator",
+			initialValue = 1
+	)
 	private Long Id;
 	
 	private String nama;
 	
 	private String alamat;
-	
-	private Integer telepon;
+
+	private String telepon;
+
+	private Integer nik;
 	
 	public Long getId() {
 		return Id;
@@ -59,8 +62,5 @@ public class Kasir {
 	public void setNik(Integer nik) {
 		this.nik = nik;
 	}
-
-	private Integer nik;
-	
 
 }
