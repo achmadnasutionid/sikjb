@@ -15,15 +15,15 @@ public class Kasir {
 	)
 	private Long Id;
 	
-	private String nama;
+	private String name;
 	
-	private String alamat;
+	private String address;
 
-	private String telepon;
+	private String telephone;
 
 	private Integer nik;
 	
-	public Long getId() {
+	public Long getKasirById() {
 		return Id;
 	}
 
@@ -31,31 +31,31 @@ public class Kasir {
 		Id = id;
 	}
 
-	public String getNama() {
-		return nama;
+	public String getKasirByName() {
+		return name;
 	}
 
-	public void setNama(String nama) {
-		this.nama = nama;
+	public void setNama(String name) {
+		this.name = name;
 	}
 
-	public String getAlamat() {
-		return alamat;
+	public String getKasirByAddress() {
+		return address;
 	}
 
-	public void setAlamat(String alamat) {
-		this.alamat = alamat;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getTelepon() {
-		return telepon;
+	public String getKasirByTelephone() {
+		return telephone;
 	}
 
-	public void setTelepon(String telepon) {
-		this.telepon = telepon;
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
-	public Integer getNik() {
+	public Integer geKasirBytNik() {
 		return nik;
 	}
 
