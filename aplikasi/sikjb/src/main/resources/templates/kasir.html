@@ -33,7 +33,7 @@
    
     <h1>Data Kasir</h1>
     <!-- Logika nya, jika ada data pada tabel maka akan ditampilkan-->
-    <div th:if="${not #lists.isEmpty(mahasiswa)}" > 
+    <div th:if="${not #lists.isEmpty(kasir)}" > 
      
      <table class="table table-striped">
     	<tr>
@@ -44,10 +44,25 @@
   
     	</tr>
     	
-    	<!-- Banyak data nya array, maka menggunakan for each dari thymeleaf -->
-    	
+    	<tr th:each="kasirs : ${kasir}">
+    		<td th:text="${kasirs.name}"></td>
+    		<td th:text="${kasirs.address}"></td>
+    		<td th:text="${kasir.telephone}"></td>
+    		
+    		<td>
+    		<a th:href="${'/kasir/edit/' +kasirs.id}">
+    		<span class="glyphicon glyphicon-edit"></span></a>
+    		
+    		<a th:href="${'/kasir/delete/' +kasirs.id}">
+    		<span class="glyphicon glyphicon-remove"></span></a>
+    		
+    		</td>
+    		</tr>	
     
     </table> 
+    <div>
+   	<a class="btn btn-default" href="/mahasiswa/create">Add New</a>
+    </div>
     </div>
     </div><!-- /.container -->
    

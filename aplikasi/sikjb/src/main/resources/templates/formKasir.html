@@ -35,12 +35,42 @@
       </div>
     </nav>
 
-    <div class="container">
-   
     <h1>Form Kasir</h1>
 
 <!--Tambahkan sintaks-->
 
+<div class="row">
+    		<div class="col-sm-8">
+    			<form class="form-horizontal" th:object="${kasir}"
+    			th:action="@{/kasir/create}" method="post">
+    				<input type="hidden" th:field="*{id}"/>
+    				<input type="hidden" th:field="*{version}"/>
+    				<div class="form-group">
+    					<label class="col-sm-2 control-label">Name:</label>
+    					<div class="col-sm-10">
+    						<input type="text" class="form-control" th:field="*{name}"/>
+    					</div>
+    				</div>
+    				<div class="form-group">
+    					<label class="col-sm-2 control-label">Address:</label>
+    					<div class="col-sm-10">
+    						<input type="text" class="form-control" th:field="*{address}"/>
+    					</div>
+    				</div>
+    				<div class="form-group">
+    					<label class="col-sm-2 control-label">Telephone:</label>
+    					<div class="col-sm-10">
+    						<input type="text" class="form-control" th:field="*{telephone}"/>
+    					</div>
+    				</div>
+    				<div class="form-group">
+    					<br> <button type="submit" class="btn btn-default">Save</button>
+     				</div>
+    				</form>
+    		</div>
+    </div>
+
+    <div class="container">
 
    		
     </div><!-- /.container -->
