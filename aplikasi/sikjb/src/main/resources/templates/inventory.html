@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Starter Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+   <link th:href="@{/css/bootstrap.css}" rel="stylesheet" media="screen"/>
+    <!-- Custom styles for this template -->
+     <link th:href="@{/css/starter-template.css}" rel="stylesheet" media="screen"/>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+       data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+   
+    <h1>Data Inventory</h1>
+    <!-- Logika nya, jika ada data pada tabel maka akan ditampilkan-->
+    <div th:if="${not #lists.isEmpty(inventory)}" > 
+     
+     <table class="table table-striped">
+    	<tr>
+    		<th>Nama</th>
+    		<th>Jumlah</th>
+			<th>Harga</th>  
+			<th>Action</th>  
+  
+    	</tr>
+    	
+    	<!-- Banyak data nya array, maka menggunakan for each dari thymeleaf -->
+    	
+    	<tr th:each="inventorys : ${inventory}">
+    		<td th:text="${inventorys.nama}"></td>
+    		<td th:text="${inventorys.jumlah}"></td>
+    		<td th:text="${inventorys.harga}"></td>
+    		<td>
+    		<a th:href="${'/inventory/edit/' +inventorys.id}">
+    		<span class="glyphicon glyphicon-edit"></span></a>
+    		
+    		<a th:href="${'/inventory/hapus/' +inventorys.id}">
+    		<span class="glyphicon glyphicon-remove"></span></a>
+    		
+    		</td>
+    		</tr>
+    		
+    </table> 
+    <div>
+    	<a class="btn btn-default" href="/inventory/create">Add New</a>
+    </div>
+    </div>
+    
+    </div><!-- /.container -->
+   
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+
+	<script th:src="@{/js/jquery.js}"></script>
+	<script th:src="@{/js/bootstrap.js}"></script>
+	
+  </body>
+</html>
