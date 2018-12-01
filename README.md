@@ -1,6 +1,6 @@
 # sikjb
 
-Proyek Pabwe - Membuat Aplikasi Web
+Proyek Pabwe x DSI - Membangun Aplikasi Web
 
 Kelompok 6 :
 1. Yohana Lubis (11S16005)
