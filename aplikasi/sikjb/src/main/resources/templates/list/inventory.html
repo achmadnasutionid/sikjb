@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-    <title>Manager Koperasi</title>
+    <title>Inventory Koperasi</title>
     <!-- Bootstrap core CSS -->
    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" media="screen"/>
     <!-- Custom styles for this template -->
@@ -46,44 +46,43 @@
   </nav>
     <div class="container">
    
-    <h1>Data Manager</h1>
+    <h1>Data Inventory</h1>
     <!-- Logika nya, jika ada data pada tabel maka akan ditampilkan-->
-    <div th:if="${not #lists.isEmpty(manager)}" >
+    <div th:if="${not #lists.isEmpty(inventory)}" > 
      
      <table class="table table-striped">
     	<tr>
     		<th>Name</th>
-    		<th>Address</th>
-			<th>Telephone</th>
-            <th></th>
+    		<th>Stock</th>
+			<th>Price</th>
+			<th></th>
+  
     	</tr>
     	
     	<!-- Banyak data nya array, maka menggunakan for each dari thymeleaf -->
+    	
+    	<tr th:each="inventorys : ${inventory}">
+    		<td th:text="${inventorys.name}"></td>
+    		<td th:text="${inventorys.stock}"></td>
+    		<td th:text="${inventorys.price}"></td>
+    		<td>
+    		<a th:href="${'/inventory/edit/' +inventorys.id}">
+    		<span class="glyphicon glyphicon-edit"></span></a>
 
-         <tr th:each="managers : ${manager}">
-             <td th:text="${managers.name}"></td>
-             <td th:text="${managers.address}"></td>
-             <td th:text="${managers.telephone}"></td>
-             <td>
-                 <a th:href="${'/manager/edit/' +managers.getId()}">
-                     <span class="glyphicon glyphicon-edit"></span>
-                 </a>
-
-                 <a th:href="${'/manager/delete/' +managers.getId()}" onclick="return confirm('Are you sure you want to delete this item ?');">
-                     <span class="glyphicon glyphicon-remove"></span>
-                 </a>
-             </td>
-         </tr>
-    
-    </table>
+                <a th:href="${'/inventory/delete/' +inventorys.getId()}" onclick="return confirm('Are you sure you want to delete this item ?');">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+    		
+    		</td>
+    		</tr>
+    		
+    </table> 
 
     </div>
         <div>
-            <a class="btn btn-default" href="/manager/create">Add New</a>
+            <a class="btn btn-default" href="/inventory/create">Add New</a>
         </div>
     </div><!-- /.container -->
-
-
    
     <!-- Bootstrap core JavaScript
     ================================================== -->
