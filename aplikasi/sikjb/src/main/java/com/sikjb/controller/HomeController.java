@@ -6,32 +6,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-	
-    @RequestMapping("/")
-    public String home() {
-        return "home";
-    }
-    
-    @GetMapping("/")
-	 public String root() {
-	 return "index";
+
+	 @GetMapping("/")
+	 public String index() {
+	 	return "login";
 	 }
-	 @GetMapping("/user")
-	 public String userIndex() {
-	 return "user/index";
-	 }
+
 	 @GetMapping("/login")
 	 public String login() {
-	 return "login";
+	 	return "login";
 	 }
+
 	 @GetMapping("/access-denied")
 	 public String accessDenied() {
-	 return "/error/access-denied";
+	 	return "/error/access-denied";
 	 }
 
-	 @GetMapping("/home")
+	 @RequestMapping("/home")
 	 public String home() {
-	 return "home";
-	 }
-
+		return "home";
+	}
 }
