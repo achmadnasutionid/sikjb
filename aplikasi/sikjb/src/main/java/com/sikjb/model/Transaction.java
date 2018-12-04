@@ -1,5 +1,7 @@
 package com.sikjb.model;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.util.Date;
 
 import javax.persistence.*;
@@ -11,7 +13,7 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	
+
 	private String name;
 	
 	private Long income;
