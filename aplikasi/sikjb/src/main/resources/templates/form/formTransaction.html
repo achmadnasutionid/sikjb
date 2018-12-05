@@ -33,9 +33,9 @@
               <ul class="nav navbar-nav">
                   <li class="active"><a href="/home">Home</a></li>
                   <li><a href="/transaction">Transaction</a></li>
-                  <li><a href="/laporan">Laporan</a></li>
+                  <li><a href="/report">Report</a></li>
                   <li><a href="/inventory">Inventory</a></li>
-                  <li><a href="/kasir">Kasir</a></li>
+                  <li><a href="/cashier">Cashier</a></li>
                   <li><a href="/manager">Manager</a> </li>
 
               </ul>
@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-sm-8">
                 <form class="form-horizontal" th:object="${transaction}"
-                      th:action="@{/tansaction/create}" method="post">
+                      th:action="@{/transaction/create}" method="post">
                     <input type="hidden" th:field="*{id}"/>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Name:</label>

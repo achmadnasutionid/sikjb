@@ -1,7 +1,8 @@
 package com.sikjb.model;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -19,8 +20,9 @@ public class Transaction {
 	private Long income;
 	
 	private Long outcome;
-	
-	private Date date;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate date;
 	
 	public Long getId() {
 		return Id;
@@ -54,11 +56,11 @@ public class Transaction {
 		this.outcome = outcome;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
