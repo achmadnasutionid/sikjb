@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-    <title>Kasir Koperasi</title>
+    <title>Cashier Koperasi</title>
     <!-- Bootstrap core CSS -->
    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" media="screen"/>
     <!-- Custom styles for this template -->
@@ -27,10 +27,10 @@
           <div id="navbar" class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
                   <li class="active"><a href="/home">Home</a></li>
-                  <li><a href="/transaksi">Transaksi</a></li>
-                  <li><a href="/laporan">Laporan</a></li>
+                  <li><a href="/transaction">Transaction</a></li>
+                  <li><a href="/report">Report</a></li>
                   <li><a href="/inventory">Inventory</a></li>
-                  <li><a href="/kasir">Kasir</a></li>
+                  <li><a href="/cashier">Cashier</a></li>
                   <li><a href="/manager">Manager</a> </li>
 
               </ul>
@@ -46,9 +46,9 @@
   </nav>
     <div class="container">
    
-    <h1>Data Kasir</h1>
+    <h1>Data Cashier</h1>
     <!-- Logika nya, jika ada data pada tabel maka akan ditampilkan-->
-    <div th:if="${not #lists.isEmpty(kasir)}">
+    <div th:if="${not #lists.isEmpty(cashier)}">
      
      <table class="table table-striped">
     	<tr>
@@ -59,16 +59,16 @@
   
     	</tr>
     	
-    	<tr th:each="kasirs : ${kasir}">
-    		<td th:text="${kasirs.name}"></td>
-    		<td th:text="${kasirs.address}"></td>
-    		<td th:text="${kasirs.telephone}"></td>
+    	<tr th:each="cashiers : ${cashier}">
+    		<td th:text="${cashiers.name}"></td>
+    		<td th:text="${cashiers.address}"></td>
+    		<td th:text="${cashiers.telephone}"></td>
     		
     		<td>
-    		<a th:href="${'/kasir/edit/' +kasirs.id}">
+    		<a th:href="${'/cashier/edit/' +cashiers.id}">
     		<span class="glyphicon glyphicon-edit"></span></a>
 
-                <a th:href="${'/kasir/delete/' +kasirs.getId()}" onclick="return confirm('Are you sure you want to delete this item ?');">
+                <a th:href="${'/cashier/delete/' +cashiers.getId()}" onclick="return confirm('Are you sure you want to delete this item ?');">
                     <span class="glyphicon glyphicon-remove"></span>
                 </a>
     		
@@ -79,7 +79,7 @@
 
     </div>
         <div>
-            <a class="btn btn-default" href="/kasir/create">Add New</a>
+            <a class="btn btn-default" href="/cashier/create">Add New</a>
         </div>
     </div><!-- /.container -->
    

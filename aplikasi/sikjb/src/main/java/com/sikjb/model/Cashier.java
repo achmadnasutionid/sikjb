@@ -3,8 +3,8 @@ package com.sikjb.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "kasir")
-public class Kasir {
+@Table(name = "cashier")
+public class Cashier {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
