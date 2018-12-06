@@ -1,5 +1,8 @@
 package com.sikjb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -27,6 +30,12 @@ public class Transaction {
 	public Long getId() {
 		return Id;
 	}
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "report_id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
+	private Report report;
 
 	public void setId(Long id) {
 		Id = id;
@@ -83,5 +92,12 @@ public class Transaction {
 	private Long inventory_id;
 	
 	private Integer inventory_quantity;
-	
+
+	public Report getReport() {
+		return report;
+	}
+
+	public void setReport(Report report) {
+		this.report = report;
+	}
 }

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "cashier")
+@Table(name = "report")
 public class Report {
 
 	@Id
@@ -23,8 +23,6 @@ public class Report {
 	private Long income;
 	
 	private Long outcome;
-	
-	private Set<Transaction> transaction;
 
 	public Long getId() {
 		return Id;
@@ -65,19 +63,6 @@ public class Report {
 	public void setOutcome(Long outcome) {
 		this.outcome = outcome;
 	}
-
-	public Set<Transaction> getTransaction() {
-		return transaction;
-	}
-
-	public void setTransaction(Set<Transaction> transaction) {
-		this.transaction = transaction;
-	}
-
-
-	
-	
-	
 
 }
 	
