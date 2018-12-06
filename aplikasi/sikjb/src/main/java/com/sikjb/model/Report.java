@@ -1,29 +1,31 @@
 package com.sikjb.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
-
+import java.util.Set;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
-@Table(name = "transaction")
-public class Transaction {
-	
+@Table(name = "cashier")
+public class Report {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-
+	
 	private String name;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate date;
 	
 	private Long income;
 	
 	private Long outcome;
-
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate date;
 	
+	private Set<Transaction> transaction;
+
 	public Long getId() {
 		return Id;
 	}
@@ -38,6 +40,14 @@ public class Transaction {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 	public Long getIncome() {
@@ -56,32 +66,25 @@ public class Transaction {
 		this.outcome = outcome;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public Set<Transaction> getTransaction() {
+		return transaction;
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setTransaction(Set<Transaction> transaction) {
+		this.transaction = transaction;
 	}
 
-	public Long getInventory_id() {
-		return inventory_id;
-	}
 
-	public void setInventory_id(Long inventory_id) {
-		this.inventory_id = inventory_id;
-	}
-
-	public Integer getInventory_quantity() {
-		return inventory_quantity;
-	}
-
-	public void setInventory_quantity(Integer inventory_quantity) {
-		this.inventory_quantity = inventory_quantity;
-	}
-
-	private Long inventory_id;
 	
-	private Integer inventory_quantity;
 	
+	
+
 }
+	
+	
+
+
+	
+	
+	
+
