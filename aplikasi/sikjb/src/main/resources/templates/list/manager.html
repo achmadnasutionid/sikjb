@@ -26,12 +26,12 @@
           </div>
           <div id="navbar" class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
-                  <li class="active"><a href="/home">Home</a></li>
+                  <li><a href="/home">Home</a></li>
                   <li><a href="/transaction">Transaction</a></li>
                   <li><a href="/report">Report</a></li>
                   <li><a href="/inventory">Inventory</a></li>
                   <li><a href="/cashier">Cashier</a></li>
-                  <li><a href="/manager">Manager</a> </li>
+                  <li class="active"><a href="/manager">Manager</a> </li>
 
               </ul>
 
@@ -47,6 +47,10 @@
     <div class="container">
    
     <h1>Data Manager</h1>
+        <div>
+            <a class="btn btn-success" href="/manager/create">Add New</a>
+        </div>
+        <br>
     <!-- Logika nya, jika ada data pada tabel maka akan ditampilkan-->
     <div th:if="${not #lists.isEmpty(manager)}" >
      
@@ -78,9 +82,7 @@
     </table>
 
     </div>
-        <div>
-            <a class="btn btn-default" href="/manager/create">Add New</a>
-        </div>
+
     </div><!-- /.container -->
 
 
