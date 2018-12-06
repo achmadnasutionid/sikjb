@@ -1,6 +1,6 @@
-Menambahkan kodingan yohana
-Menambahkan Report
-Menambahkan Role
-Menambahkan User
-Menambahkan kodingan rumondang
-Menambahkan kodingan yohana
+1. Menambahkan kodingan yohana
+2. Menambahkan Report
+3. Menambahkan Role
+4. Menambahkan User
+5. Menambahkan kodingan rumondang
+6. Menambahkan kodingan yohana
