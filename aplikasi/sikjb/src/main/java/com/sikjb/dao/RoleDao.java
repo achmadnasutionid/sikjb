@@ -31,19 +31,19 @@ public class RoleDao implements RoleService {
 	}
 	
 	@Override
-	public void deleteRole(Long roleId) {
+	public void deleteRole(String roleUsername) {
 		
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		em.remove(em.find(Role.class, roleId));
+		em.remove(em.find(Role.class, roleUsername));
 		em.getTransaction().commit();
 	}
 	
 	@Override
-	public Role getRoleById(Long roleId) {
+	public Role getRoleByUsername(String roleUsername) {
 		
 		EntityManager em = emf.createEntityManager();
-		return em.find(Role.class, roleId);
+		return em.find(Role.class, roleUsername);
 	}
 	
 	@Override

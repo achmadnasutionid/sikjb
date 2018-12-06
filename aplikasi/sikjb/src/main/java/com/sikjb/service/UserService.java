@@ -10,8 +10,8 @@ public interface UserService {
 	
 	User saveOrUpdate(User user);
 	
-	User getUserById(Long userId);
+	User getUserByUsername(String userUsername);
 	
-	void deleteUser(Long userId);
+	void deleteUser(String userId);
 
 }

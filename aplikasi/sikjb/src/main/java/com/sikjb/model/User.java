@@ -1,9 +1,6 @@
 package com.sikjb.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -15,10 +12,14 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
-	@Id 
+	@Id
+	@Column(unique=true)
 	private String username;
 	
 	private String password;
+
+	@Column(columnDefinition = "Integer DEFAULT 1")
+	private Integer enable;
 	
 	public Long getId() {
 		return Id;
@@ -36,16 +37,13 @@ public class User {
 		this.username = username;
 	}
 
-	public Short getEnable() {
+	public Integer getEnable() {
 		return enable;
 	}
 
-	public void setEnable(Short enable) {
+	public void setEnable(Integer enable) {
 		this.enable = enable;
 	}
-
-	@Value("enable=1")
-	private Short enable;
 
 	public String getPassword() {
 		return password;

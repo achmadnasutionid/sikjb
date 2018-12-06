@@ -1,26 +1,26 @@
 package com.sikjb.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class Role {
-	
-	@Id
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="username", unique=true)
+
+	@Id
+	@Column(unique=true)
 	private String username;
-	
-	@Column(name="role", unique=true)
+
 	private String role;
-	
-	
-	public String getRole() {
-		return role;
+
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -30,7 +30,12 @@ public class Role {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
- 
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 }

@@ -34,19 +34,19 @@ public class UserDao implements UserService {
 	}
 	
 	@Override
-	public void deleteUser(Long userId) {
+	public void deleteUser(String userUsername) {
 		
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		em.remove(em.find(User.class, userId));
+		em.remove(em.find(User.class, userUsername));
 		em.getTransaction().commit();
 	}
 	
 	@Override
-	public User getUserById(Long userId) {
+	public User getUserByUsername(String userUsername) {
 		
 		EntityManager em = emf.createEntityManager();
-		return em.find(User.class, userId);
+		return em.find(User.class, userUsername);
 	}
 	
 	@Override
