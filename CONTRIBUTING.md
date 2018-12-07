@@ -4,3 +4,4 @@
 4. Menambahkan User
 5. Menambahkan kodingan rumondang
 6. Menambahkan kodingan yohana
+7. Menambahkan footer
