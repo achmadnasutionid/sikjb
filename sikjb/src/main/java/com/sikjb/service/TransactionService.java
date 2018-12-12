@@ -12,6 +12,5 @@ public interface TransactionService {
 
 	 Transaction getTransactionById(Long transactionId);
 	 
-	  void deleteTransaction(Long transactionId);
-
+	  void deleteTransactionById(Long transactionId);
 }

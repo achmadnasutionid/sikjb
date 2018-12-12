@@ -37,13 +37,13 @@ public class TransactionDao implements TransactionService {
     }
 
     @Override
-    public Transaction getTransactionById(Long TransactionId) {
+    public Transaction getTransactionById(Long transactionId) {
         EntityManager em = emf.createEntityManager();
-		return em.find(Transaction.class, TransactionId);
+		return em.find(Transaction.class, transactionId);
     }
 
     @Override
-    public void deleteTransaction(Long transactionId) {
+    public void deleteTransactionById(Long transactionId) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.remove(em.find(Transaction.class, transactionId));

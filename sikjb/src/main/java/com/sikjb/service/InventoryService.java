@@ -9,9 +9,9 @@ public interface InventoryService {
 		
 		Inventory saveOrUpdate(Inventory inventory);
 		
-		Inventory getInventoryById(Long Id);
+		Inventory getInventoryById(Long inventoryId);
 
-		void deleteInventory(Long invetoryId);
+		void deleteInventoryById(Long inventoryId);
 		
 	}
 

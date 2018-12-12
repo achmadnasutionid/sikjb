@@ -8,18 +8,17 @@ import org.springframework.beans.factory.annotation.Value;
 @Entity
 public class User {
 	 
-	
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	
-	@Id
+
 	@Column(unique=true)
 	private String username;
 	
 	private String password;
 
-	@Column(columnDefinition = "Integer DEFAULT 1")
-	private Integer enable;
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Role role;
 	
 	public Long getId() {
 		return Id;
@@ -33,17 +32,6 @@ public class User {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public Integer getEnable() {
-		return enable;
-	}
-
-	public void setEnable(Integer enable) {
-		this.enable = enable;
-	}
 
 	public String getPassword() {
 		return password;
@@ -52,7 +40,17 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

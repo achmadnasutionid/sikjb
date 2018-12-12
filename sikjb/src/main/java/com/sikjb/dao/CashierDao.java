@@ -32,7 +32,7 @@ public class CashierDao implements CashierService {
 	}
 	
 	@Override
-	public void deleteCashier(Long cashierId) {
+	public void deleteCashierById(Long cashierId) {
 		
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();

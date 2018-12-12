@@ -41,7 +41,7 @@ public class ManagerDao implements ManagerService {
     }
 
     @Override
-    public void deleteManager(Long managerId) {
+    public void deleteManagerById(Long managerId) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.remove(em.find(Manager.class, managerId));

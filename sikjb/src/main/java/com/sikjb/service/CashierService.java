@@ -12,6 +12,6 @@ public interface CashierService {
 	
 	Cashier getCashierById(Long cashierId);
 	
-	void deleteCashier(Long cashierId);
+	void deleteCashierById(Long cashierId);
 
 }
