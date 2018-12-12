@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "manager")
-public class Manager {
+public class Manager{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +17,9 @@ public class Manager {
     private String telephone;
 
     private String nik;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    private User user;
 
     public Long getId() {
         return Id;
@@ -56,5 +59,13 @@ public class Manager {
 
     public void setNik(String nik) {
         this.nik = nik;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -20,7 +20,6 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
 
               </button>
           </div>
@@ -52,29 +51,31 @@
         </div>
         <br>
     <!-- Logika nya, jika ada data pada tabel maka akan ditampilkan-->
-    <div th:if="${not #lists.isEmpty(inventory)}" > 
+    <div style="max-height: 700px; overflow: auto" th:if="${not #lists.isEmpty(inventory)}" >
      
-     <table class="table table-striped">
+     <table id="t01" class="table table-striped">
     	<tr>
+            <th style="text-align: center">#</th>
     		<th>Name</th>
     		<th>Stock</th>
 			<th>Price</th>
-			<th></th>
+			<th style="text-align: center;">Opsi</th>
   
     	</tr>
     	
     	<!-- Banyak data nya array, maka menggunakan for each dari thymeleaf -->
     	
     	<tr th:each="inventorys : ${inventory}">
+            <td align="center"></td>
     		<td th:text="${inventorys.name}"></td>
     		<td th:text="${inventorys.stock}"></td>
     		<td th:text="${inventorys.price}"></td>
-    		<td>
-    		<a th:href="${'/inventory/edit/' +inventorys.id}">
-    		<span class="glyphicon glyphicon-edit"></span></a>
+    		<td align="center">
+    		<a class="btn btn-warning" th:href="${'/inventory/edit/' +inventorys.id}">
+    		Detail</a>
 
-                <a th:href="${'/inventory/delete/' +inventorys.getId()}" onclick="return confirm('Are you sure you want to delete this item ?');">
-                    <span class="glyphicon glyphicon-remove"></span>
+                <a class="btn btn-danger" th:href="${'/inventory/delete/' +inventorys.getId()}" onclick="return confirm('Are you sure you want to delete this item ?');">
+                    Delete
                 </a>
     		
     		</td>

@@ -1,6 +1,40 @@
 body {
   padding-top: 50px;
 }
+
+.auto-index td:first-child:before
+{
+  counter-increment: Serial;      /* Increment the Serial counter */
+  content: counter(Serial); /* Display the counter */
+}
+
+body
+{
+  counter-reset: Serial;           /* Set the Serial counter to 0 */
+}
+
+table
+{
+  border-collapse: separate;
+}
+
+tr td:first-child:before
+{
+  counter-increment: Serial;      /* Increment the Serial counter */
+  content: counter(Serial); /* Display the counter */
+}
+
+table#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+  background-color: #fff;
+}
+table#t01 th {
+  background-color: #222222;
+  color: white;
+}
+
 .starter-template {
   padding: 40px 15px;
   text-align: center;

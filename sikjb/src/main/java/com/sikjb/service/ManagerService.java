@@ -12,6 +12,6 @@ public interface ManagerService {
 
     Manager getManagerById(Long managerId);
 
-    void deleteManager(Long managerId);
+    void deleteManagerById(Long managerId);
 
 }

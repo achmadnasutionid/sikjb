@@ -24,7 +24,7 @@ public class InventoryContoller {
 		  
 		
 		@RequestMapping("/inventory")
-		public String InventoryList(Model model) {
+		public String showInventoryList(Model model) {
 			model.addAttribute("inventory", inventoryService.listInventory());
 			return "list/inventory";
 		}
@@ -48,8 +48,8 @@ public class InventoryContoller {
 		}
 		
 		@RequestMapping(value = "/inventory/delete/{inventoryId}", method = RequestMethod.GET)
-		public String deleteInventory(@PathVariable Long inventoryId) {
-			inventoryService.deleteInventory(inventoryId);
+		public String deleteOneInventory(@PathVariable Long inventoryId) {
+			inventoryService.deleteInventoryById(inventoryId);
 			return "redirect:/inventory";
 		}
 }

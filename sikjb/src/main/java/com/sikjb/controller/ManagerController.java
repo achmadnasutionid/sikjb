@@ -20,7 +20,7 @@ public class ManagerController {
     }
 
     @RequestMapping("/manager")
-    public String ManagerList(Model model) {
+    public String showManagerList(Model model) {
         model.addAttribute("manager", managerService.listManager());
         return "list/manager";
     }
@@ -44,8 +44,8 @@ public class ManagerController {
     }
 
     @RequestMapping(value = "/manager/delete/{managerId}", method = RequestMethod.GET)
-    public String deleteManager(@PathVariable Long managerId) {
-        managerService.deleteManager(managerId);
+    public String deleteOneManager(@PathVariable Long managerId) {
+        managerService.deleteManagerById(managerId);
         return "redirect:/manager";
     }
 }

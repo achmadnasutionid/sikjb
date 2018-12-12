@@ -22,7 +22,7 @@ public class CashierController {
 	}
 	
 	@RequestMapping("/cashier")
-	public String CashierList(Model model) {
+	public String showCashierList(Model model) {
 		model.addAttribute("cashier", cashierService.listCashier());
 		return "list/cashier";
 	}
@@ -39,15 +39,15 @@ public class CashierController {
 			return "redirect:/cashier";
 	}
 	
-	@RequestMapping(value = "/cashier/edit/{cashierId}", method = RequestMethod.GET)
-	public String showFormEditCashier(@PathVariable Long cashierId, Model model) {
-			model.addAttribute("cashier", cashierService.getCashierById(cashierId));
+	@RequestMapping(value = "/cashier/edit/{Id}", method = RequestMethod.GET)
+	public String showFormEditCashier(@PathVariable Long Id, Model model) {
+			model.addAttribute("cashier", cashierService.getCashierById(Id));
 			return "form/formCashier";
 	}
 	
-	@RequestMapping(value = "/cashier/delete/{kasirId}", method = RequestMethod.GET)
-	public String deleteCashier(@PathVariable Long cashierId) {
-			cashierService.deleteCashier(cashierId);
+	@RequestMapping(value = "/cashier/delete/{Id}", method = RequestMethod.GET)
+	public String deleteOneCashier(@PathVariable Long Id) {
+			cashierService.deleteCashierById(Id);
 			return "redirect:/cashier";
 }
 }

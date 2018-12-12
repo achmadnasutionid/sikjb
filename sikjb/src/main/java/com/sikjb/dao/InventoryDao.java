@@ -38,7 +38,7 @@ public class InventoryDao implements InventoryService {
 		}
 		
 		@Override
-		public void deleteInventory(Long inventoryId) {
+		public void deleteInventoryById(Long inventoryId) {
 			
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
