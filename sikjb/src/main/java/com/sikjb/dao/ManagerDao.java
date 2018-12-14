@@ -3,6 +3,7 @@ package com.sikjb.dao;
 import com.sikjb.model.Manager;
 import com.sikjb.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -20,12 +21,14 @@ public class ManagerDao implements ManagerService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     public List<Manager> listManager() {
         EntityManager em = emf.createEntityManager();
         return em.createQuery("from Manager", Manager.class).getResultList();
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Manager saveOrUpdate(Manager manager) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -35,12 +38,14 @@ public class ManagerDao implements ManagerService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     public Manager getManagerById(Long managerId) {
         EntityManager em = emf.createEntityManager();
         return em.createQuery("from Manager where id="+managerId, Manager.class).getSingleResult();
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteManagerById(Long managerId) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

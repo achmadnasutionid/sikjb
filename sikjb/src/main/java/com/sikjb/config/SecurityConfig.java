@@ -7,6 +7,7 @@ package com.sikjb.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -26,6 +27,7 @@ import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -42,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 			http.csrf().disable()
 	 			.authorizeRequests()
 				.antMatchers("/", "/js/**", "/css/**").permitAll()
-	 			.antMatchers("/**")
+	 			.antMatchers("/admin/**")
 				.hasRole("ADMIN")
 	 			.anyRequest().authenticated()
 	 			.and()
@@ -70,5 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
  	protected void configure(AuthenticationManagerBuilder auth) throws Exception
  	{
 	 	auth.inMemoryAuthentication().withUser("admin").password("{noop}admin123").roles("ADMIN");
+	 	auth.inMemoryAuthentication().withUser("manager").password("{noop}manager123").roles("MANAGER");
+	 	auth.inMemoryAuthentication().withUser("cashier").password("{noop}cashier123").roles("CASHIER");
  	}
 }
