@@ -71,9 +71,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
  	{
 	 	auth.inMemoryAuthentication().withUser("admin").password("{noop}admin123").roles("ADMIN");
  	}
-
- 	@Override
-	public configure(AuthenticationManagerBuilder builder) {
- 		builder.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery("select username from user where username=?").
-	}
 }
