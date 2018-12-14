@@ -15,7 +15,7 @@ public class HomeController {
 
 	 @GetMapping("/login")
 	 public String login() {
-	 	return "login";
+	 	return "/security/login";
 	 }
 
 	 @GetMapping("/access-denied")

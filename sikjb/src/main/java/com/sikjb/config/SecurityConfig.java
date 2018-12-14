@@ -21,6 +21,7 @@ import com.sikjb.web.LoggingAccessDeniedHandler;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 
 @Configuration
@@ -29,7 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
  	private LoggingAccessDeniedHandler accessDeniedHandler;
+
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+	@Autowired
+	DataSource dataSource;
 
  	@Override
  	protected void configure(HttpSecurity http) throws Exception
@@ -37,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 			http.csrf().disable()
 	 			.authorizeRequests()
 				.antMatchers("/", "/js/**", "/css/**").permitAll()
-	 			.antMatchers("/admin/**")
+	 			.antMatchers("/**")
 				.hasRole("ADMIN")
 	 			.anyRequest().authenticated()
 	 			.and()
@@ -66,4 +71,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
  	{
 	 	auth.inMemoryAuthentication().withUser("admin").password("{noop}admin123").roles("ADMIN");
  	}
+
+ 	@Override
+	public configure(AuthenticationManagerBuilder builder) {
+ 		builder.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery("select username from user where username=?").
+	}
 }
