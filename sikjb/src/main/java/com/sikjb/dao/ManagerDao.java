@@ -21,7 +21,7 @@ public class ManagerDao implements ManagerService {
     }
 
     @Override
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_MANAGER') OR hasRole('ROLE_CASHIER')")
     public List<Manager> listManager() {
         EntityManager em = emf.createEntityManager();
         return em.createQuery("from Manager", Manager.class).getResultList();
@@ -38,7 +38,7 @@ public class ManagerDao implements ManagerService {
     }
 
     @Override
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @PreAuthorize("hasRole('ROLE_MANAGER') OR hasRole('ROLE_ADMIN') OR hasRole('ROLE_CASHIER')")
     public Manager getManagerById(Long managerId) {
         EntityManager em = emf.createEntityManager();
         return em.createQuery("from Manager where id="+managerId, Manager.class).getSingleResult();
