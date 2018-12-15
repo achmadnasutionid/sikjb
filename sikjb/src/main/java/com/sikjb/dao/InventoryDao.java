@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.sikjb.model.Inventory;
@@ -28,6 +29,7 @@ public class InventoryDao implements InventoryService {
 		}
 		
 		@Override
+		@PreAuthorize("hasRole('ROLE_CASHIER')")
 		public Inventory saveOrUpdate(Inventory inventory) {
 			
 			EntityManager em = emf.createEntityManager();
@@ -38,6 +40,7 @@ public class InventoryDao implements InventoryService {
 		}
 		
 		@Override
+		@PreAuthorize("hasRole('ROLE_CASHIER')")
 		public void deleteInventoryById(Long inventoryId) {
 			
 			EntityManager em = emf.createEntityManager();

@@ -21,7 +21,7 @@ public class ManagerDao implements ManagerService {
     }
 
     @Override
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Manager> listManager() {
         EntityManager em = emf.createEntityManager();
         return em.createQuery("from Manager", Manager.class).getResultList();

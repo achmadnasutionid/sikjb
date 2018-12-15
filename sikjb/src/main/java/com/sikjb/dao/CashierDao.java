@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 
 import com.sikjb.model.Cashier;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.sikjb.service.CashierService;
@@ -22,6 +23,7 @@ public class CashierDao implements CashierService {
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ROLE_MANAGER')")
 	public Cashier saveOrUpdate(Cashier cashier) {
 		
 		EntityManager em = emf.createEntityManager();
@@ -32,6 +34,7 @@ public class CashierDao implements CashierService {
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ROLE_MANAGER')")
 	public void deleteCashierById(Long cashierId) {
 		
 		EntityManager em = emf.createEntityManager();
