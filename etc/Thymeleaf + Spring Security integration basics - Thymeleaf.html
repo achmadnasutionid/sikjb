@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://www.thymeleaf.org/doc/articles/springsecurity.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Thymeleaf + Spring Security integration basics - Thymeleaf</title>
+	
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="icon" href="https://www.thymeleaf.org/doc/images/favicon.ico">
+	<link rel="stylesheet" href="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/css">
+	<link rel="stylesheet" href="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/css(1)">
+	<link rel="stylesheet" href="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/normalize.min.css" media="screen">
+	<link rel="stylesheet" href="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/thymeleaf.css">
+	<link rel="stylesheet" href="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/thymeleaf-articles.css">
+
+	<script src="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/dumb-query-selector.js.download" defer=""></script>
+	<script src="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/prism-core.min.js.download" defer="" data-manual=""></script>
+	<script src="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/prism-markup.min.js.download" defer=""></script>
+	<script src="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/prism-clike.min.js.download" defer=""></script>
+	<script src="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/prism-java.min.js.download" defer=""></script>
+	<script src="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/prism-line-numbers.min.js.download" defer=""></script>
+	<script src="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/thymeleaf-articles.js.download" defer=""></script>
+</head>
+
+<body lang="en" class="article">
+
+	<div class="fluid-container toolbar-container">
+		<nav class="fluid-block toolbar">
+			<div class="toolbar-menu">
+				<div class="toolbar-menu-location">Docs</div>
+				<button id="site-menu-button" type="button" class="toolbar-menu-button">Site Menu</button>
+			</div>
+			<div id="site-menu" class="toolbar-menu-items">
+				<ul class="toolbar-links">
+					<li><a href="https://www.thymeleaf.org/index.html" class="toolbar-link">Home</a></li>
+					<li><a href="https://www.thymeleaf.org/download.html" class="toolbar-link">Download</a></li>
+					<li class="selected"><a href="https://www.thymeleaf.org/documentation.html" class="toolbar-link">Docs</a></li>
+					<li><a href="https://www.thymeleaf.org/ecosystem.html" class="toolbar-link">Ecosystem</a></li>
+					<li><a href="https://www.thymeleaf.org/faq.html" class="toolbar-link">FAQ</a></li>
+				</ul>
+				<ul id="site-nav-links" class="toolbar-links">
+					<li><a href="http://forum.thymeleaf.org/" class="toolbar-link">Forum</a></li>
+					<li><a href="https://twitter.com/thymeleaf" class="toolbar-link">Twitter</a></li>
+					<li><a href="https://github.com/thymeleaf" class="toolbar-link">GitHub</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div class="hero-container fluid-container">
+		<header class="hero-header fluid-block">
+			<div class="hero-header-text">
+				<h1 class="hero-header-title">Thymeleaf</h1>
+			</div>
+			<div class="hero-header-image">
+				<img src="./Thymeleaf + Spring Security integration basics - Thymeleaf_files/thymeleaf.png" alt="Thymeleaf logo" class="hero-header-logo">
+			</div>
+		</header>
+	</div>
+
+	<div class="fluid-container">
+		<main class="fluid-block article">
+			<article>
+				<header>
+					<h1>Thymeleaf + Spring Security integration basics</h1>
+											<div class="article-author">
+							Written by José Miguel Samper &lt;jmiguelsamper AT users.sourceforge.net&gt;
+						</div>
+									</header>
+				<p>Have you switched to Thymeleaf but your login and error pages are still using JSP? In this article we will see how to configure your Spring application to use Thymeleaf for login and error pages.</p>
+<p>All the code seen here comes from a working application. You can view or download the source code from <a href="https://github.com/thymeleaf/thymeleafexamples-springsecurity">its GitHub repo</a>.</p>
+<p><strong>Note</strong> that the Thymeleaf integration packages for Spring Security support both Spring MVC and Spring WebFlux applications since Spring Security 5, but this article will focus on a Spring MVC configuration.</p>
+<section id="prerequisites" class="level2">
+<h2>Prerequisites</h2>
+<p>We asume you are familiar with Thymeleaf and Spring Security, and you have a working application using these technologies. If you don’t know Spring Security, you could be interested on reading the <a href="http://static.springsource.org/spring-security/site/reference.html">Spring Security Documentation</a>.</p>
+</section>
+<section id="login-pages" class="level2">
+<h2>Login pages</h2>
+<p>With Spring Security you could specify any URL to act as a login page, just like:</p>
+<pre class=" language-java"><code class=" language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">configure</span><span class="token punctuation">(</span><span class="token keyword">final</span> HttpSecurity http<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+    http
+        <span class="token punctuation">.</span><span class="token function">formLogin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">loginPage</span><span class="token punctuation">(</span><span class="token string">"/login.html"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">failureUrl</span><span class="token punctuation">(</span><span class="token string">"/login-error.html"</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">and</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">logoutSuccessUrl</span><span class="token punctuation">(</span><span class="token string">"/index.html"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Now we have to match these pages inside a Spring Controller:</p>
+<pre class=" language-java"><code class=" language-java"><span class="token annotation punctuation">@Controller</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MainController</span> <span class="token punctuation">{</span>
+
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+  <span class="token comment" spellcheck="true">// Login form</span>
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/login.html"</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> String <span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token string">"login.html"</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment" spellcheck="true">// Login form with error</span>
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/login-error.html"</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> String <span class="token function">loginError</span><span class="token punctuation">(</span>Model model<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    model<span class="token punctuation">.</span><span class="token function">addAttribute</span><span class="token punctuation">(</span><span class="token string">"loginError"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token string">"login.html"</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre>
+<p>Note that we are using the same template <strong>login.html</strong> for both pages, but when there is an error, we set a boolean attribute into the model.</p>
+<p>Our <strong>login.html</strong> template is as follows:</p>
+<pre class=" language-html"><code class=" language-html"><span class="token doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>th</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.thymeleaf.org<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Login page<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>Login page<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name"><span class="token namespace">th:</span>if</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>${loginError}<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>error<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Wrong user or password<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name"><span class="token namespace">th:</span>action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@{/login.html}<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>username<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Username<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">&gt;</span></span>:
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>username<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>username<span class="token punctuation">"</span></span> <span class="token attr-name">autofocus</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>autofocus<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Password<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">&gt;</span></span>:
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Log in<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></code></pre>
+</section>
+<section id="error-page" class="level2">
+<h2>Error page</h2>
+<p>We can also configure an error page based on Thymeleaf. In this case Spring Security is not involved at all, we should simply add an <a href="https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc">ExceptionHandler</a> to our Spring configuration like:</p>
+<pre class=" language-java"><code class=" language-java"><span class="token annotation punctuation">@ControllerAdvice</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ErrorController</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> Logger logger <span class="token operator">=</span> LoggerFactory<span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span>ErrorController<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@ExceptionHandler</span><span class="token punctuation">(</span>Throwable<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+    <span class="token annotation punctuation">@ResponseStatus</span><span class="token punctuation">(</span>HttpStatus<span class="token punctuation">.</span>INTERNAL_SERVER_ERROR<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> String <span class="token function">exception</span><span class="token punctuation">(</span><span class="token keyword">final</span> Throwable throwable<span class="token punctuation">,</span> <span class="token keyword">final</span> Model model<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        logger<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Exception during execution of SpringSecurity application"</span><span class="token punctuation">,</span> throwable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String errorMessage <span class="token operator">=</span> <span class="token punctuation">(</span>throwable <span class="token operator">!=</span> null <span class="token operator">?</span> throwable<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token string">"Unknown error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        model<span class="token punctuation">.</span><span class="token function">addAttribute</span><span class="token punctuation">(</span><span class="token string">"errorMessage"</span><span class="token punctuation">,</span> errorMessage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token string">"error"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre>
+<p>The <strong>error.html</strong> template could be like:</p>
+<pre class=" language-html"><code class=" language-html"><span class="token doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>th</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.thymeleaf.org<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Error page<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>css/main.css<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">th:</span>href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@{/css/main.css}<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span> <span class="token attr-name"><span class="token namespace">th:</span>with</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>httpStatus<span class="token punctuation">=</span>${T(org.springframework.http.HttpStatus).valueOf(#response.status)}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span> <span class="token attr-name"><span class="token namespace">th:</span>text</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>|${httpStatus} - ${httpStatus.reasonPhrase}|<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>404<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name"><span class="token namespace">th:</span>utext</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>${errorMessage}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Error java.lang.NullPointerException<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>index.html<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">th:</span>href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@{/index.html}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Back to Home Page<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>Note how we are using Spring’s <code>HttpStatus</code> enum in order to obtain detailed information about the response status that has been set (which in this case will always be <code>500</code>, but this allows us to use this <code>error.html</code> in other error reporting scenarios).</p>
+</section>
+<section id="spring-security-dialect" class="level2">
+<h2>Spring Security Dialect</h2>
+<p>In Spring MVC environments, the <a href="https://github.com/thymeleaf/thymeleaf-extras-springsecurity">Spring Security integration module</a> works as a replacement of the <a href="http://docs.spring.io/spring-security/site/docs/4.2.x/reference/html/taglibs.html">Spring security taglib</a>.</p>
+<p>We use this dialect in the example in order to print the logged user credentials and to show different content to different roles.</p>
+<p>The <strong>sec:authorize</strong> attribute renders its content when the attribute expression is evaluated to <strong>true</strong>:</p>
+<pre class=" language-html"><code class=" language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name"><span class="token namespace">sec:</span>authorize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>isAuthenticated()<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  This content is only shown to authenticated users.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name"><span class="token namespace">sec:</span>authorize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hasRole(<span class="token punctuation">'</span>ROLE_ADMIN<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  This content is only shown to administrators.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name"><span class="token namespace">sec:</span>authorize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hasRole(<span class="token punctuation">'</span>ROLE_USER<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  This content is only shown to users.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>The <strong>sec:authentication</strong> attribute is used to print logged user name and roles:</p>
+<pre class=" language-html"><code class=" language-html">Logged user: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name"><span class="token namespace">sec:</span>authentication</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Bob<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+Roles: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name"><span class="token namespace">sec:</span>authentication</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>principal.authorities<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>[ROLE_USER, ROLE_ADMIN]<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span></code></pre>
+</section>
+			</article>
+		</main>
+	</div>
+
+	<div class="fluid-container footer-container">
+		<footer class="footer fluid-block">
+			<div class="footer-sections">
+				<h5>On this site</h5>
+				<ul class="footer-sections-links">
+					<li><a href="https://www.thymeleaf.org/index.html">Home</a></li>
+					<li><a href="https://www.thymeleaf.org/download.html">Download</a></li>
+					<li><a href="https://www.thymeleaf.org/documentation.html">Docs</a></li>
+					<li><a href="https://www.thymeleaf.org/ecosystem.html">Ecosystem</a></li>
+					<li><a href="https://www.thymeleaf.org/faq.html">FAQ</a></li>
+					<li id="footer-issue-tracking"><a href="https://www.thymeleaf.org/issuetracking.html">Issue Tracking</a></li>
+					<li><a href="https://www.thymeleaf.org/team.html">The Thymeleaf Team</a></li>
+					<li><a href="https://www.thymeleaf.org/whoisusingthymeleaf.html">Who's using Thymeleaf?</a></li>
+				</ul>
+			</div>
+			<div>
+				<h5>External links</h5>
+				<ul class="footer-sections-links">
+					<li><a href="http://forum.thymeleaf.org/">Forum</a></li>
+					<li><a href="https://twitter.com/thymeleaf">Follow us on Twitter</a></li>
+					<li><a href="https://github.com/thymeleaf">Fork us on GitHub</a></li>
+				</ul>
+			</div>
+		</footer>
+		<div class="copyright fluid-block">Copyright © The Thymeleaf Team</div>
+		<div class="license fluid-block">
+			Thymeleaf is <strong>open source</strong> software distributed under the
+			<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache License 2.0</a><br>
+			This website (excluding the names and logos of Thymeleaf users) is licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 License</a>
+		</div>
+	</div>
+
+
+
+
+</body></html>
