@@ -6,7 +6,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top"  th:include="fragment/navigation :: navigation"></nav>
 <div class="site-index">
 	<div class="container-fluid" >
-
 		<br>
 		<h1 style="font-family: 'Century Gothic', serif" align="center">Welcome to SIKJB!</h1>
 		<p style="font-family: 'Century Gothic', serif" class="lead" align="center">Sistem Informasi Koperasi Jual Beli.</p>
@@ -14,9 +13,7 @@
 		<br>
 	<div class="body-content" style="text-align: center">
 		<div class="row">
-
 			<div class="well col-md-4" sec:authorize="hasRole('ROLE_CASHIER')">
-
 				<h1><span><i class="glyphicon glyphicon-book"></i></span></h1>
 				<h2 style="font-family: 'Century Gothic', serif" class="lead">New Transaction</h2>
 				<p>Save and Note every Transaction ok!.</p>
@@ -30,9 +27,7 @@
 				<br>
 				<p style="font-family: 'Century Gothic', serif" class="lead"><a class="btn btn-success" href="/home">Create One</a></p>
 			</div>
-
 			<div class="well col-md-4" sec:authorize="hasRole('ROLE_CASHIER') || hasRole('ROLE_MANAGER')">
-
 				<h1><span><i class="glyphicon glyphicon-folder-open"></i></span></h1>
 				<h2 style="font-family: 'Century Gothic', serif" class="lead">List of Report</h2>
 				<p>Every Report that already made is here</p>
@@ -45,18 +40,14 @@
 		<br>
 	<div class="body-content" style="text-align: center">
 		<div class="row">
-
 			<div class="well col-md-4" sec:authorize="hasRole('ROLE_MANAGER')">
-
 				<h1><span><i class="glyphicon glyphicon-user"></i></span></h1>
 				<h2 style="font-family: 'Century Gothic', serif" class="lead">Cashier</h2>
 				<p>Do The CRUD to the Cashier here!.</p>
 				<br>
 				<p style="font-family: 'Century Gothic', serif" class="lead"><a class="btn btn-success" href="/cashier">CRUD</a></p>
 			</div>
-
 			<div class="well col-md-4" sec:authorize="hasRole('ROLE_CASHIER')">
-
 				<h1><span><i class="glyphicon glyphicon-oil"></i></span></h1>
 				<h2 style="font-family: 'Century Gothic', serif" class="lead">Inventory</h2>
 				<p>Do The CRUD to the Inventory Here!.</p>
