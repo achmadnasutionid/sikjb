@@ -1,47 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-    <title>Manager Koperasi</title>
-    <!-- Bootstrap core CSS -->
-   <link th:href="@{/css/bootstrap.css}" rel="stylesheet" media="screen"/>
-    <!-- Custom styles for this template -->
-     <link th:href="@{/css/starter-template.css}" rel="stylesheet" media="screen"/>
+<head lang="en"  th:include="fragment/header :: header">
   </head>
   <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-          <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                      data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-
-              </button>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-              <ul class="nav navbar-nav">
-                  <li><a href="/home">Home</a></li>
-                  <li><a href="/transaction">Transaction</a></li>
-                  <li><a href="/report">Report</a></li>
-                  <li><a href="/inventory">Inventory</a></li>
-                  <li><a href="/cashier">Cashier</a></li>
-                  <li class="active"><a href="/manager">Manager</a> </li>
-
-              </ul>
-
-              <ul class="nav navbar-nav navbar-right">
-                  <li><a th:href="@{/logout}">Logout</a></li>
-
-              </ul>
-
-          </div><!--/.nav-collapse -->
-
-      </div>
+  <nav class="navbar navbar-inverse navbar-fixed-top"  th:include="fragment/navigation :: navigation">
   </nav>
     <div class="container">
    
@@ -74,10 +36,23 @@
                      Detail
                  </a>
 
-                 <a class="btn btn-danger" th:href="${'/manager/delete/' +managers.getId()}" onclick="return confirm('Are you sure you want to delete this item ?');">
+                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                      Delete
-                 </a>
+                 </button>
              </td>
+             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h4>Are You sure You want to delete this item ?<h4>
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                             <a class="btn btn-primary" th:href="${'/manager/delete/' +managers.id}">Yes</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
          </tr>
     
     </table>
@@ -96,10 +71,7 @@
 	
   </body>
 <footer>
-    <nav class="navbar navbar-inverse navbar-fixed-bottom">
-        <div class="container">
-            <h5 style="color: #9d9d9d" class="text-center">(c) | Kelompok 6 : DSI X PABWE</h5>
-        </div>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom"  th:include="fragment/footer :: footer">
     </nav>
 </footer>
 </html>
