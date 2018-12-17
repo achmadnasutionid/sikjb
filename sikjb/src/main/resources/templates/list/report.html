@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head lang="en" th:include="fragment/header :: header">
   </head>
   <body>
@@ -8,7 +8,7 @@
     <div class="container">
    
     <h1>Data Report</h1>
-        <div>
+        <div sec:authorize="hasRole('ROLE_CASHIER')">
             <a class="btn btn-success" href="/report/create">Add New</a>
         </div>
         <br>
