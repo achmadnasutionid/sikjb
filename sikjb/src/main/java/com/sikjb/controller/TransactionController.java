@@ -13,7 +13,6 @@ import com.sikjb.service.TransactionService;
 
 @Controller
 public class TransactionController {
-	
 		
 		private TransactionService transactionService;
 
@@ -59,6 +58,6 @@ public class TransactionController {
 			transactionService.deleteTransactionById(transactionId);
 				return "redirect:/transaction";
 		}
-	}
+}
 
 

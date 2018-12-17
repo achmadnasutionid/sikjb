@@ -49,5 +49,5 @@ public class CashierController {
 	public String deleteOneCashier(@PathVariable Long Id) {
 			cashierService.deleteCashierById(Id);
 			return "redirect:/cashier";
-}
+	}
 }

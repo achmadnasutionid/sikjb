@@ -25,7 +25,6 @@ public class CashierDao implements CashierService {
 	@Override
 	@PreAuthorize("hasRole('ROLE_MANAGER')")
 	public Cashier saveOrUpdate(Cashier cashier) {
-		
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Cashier saved = em.merge(cashier);
@@ -36,7 +35,6 @@ public class CashierDao implements CashierService {
 	@Override
 	@PreAuthorize("hasRole('ROLE_MANAGER')")
 	public void deleteCashierById(Long cashierId) {
-		
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.remove(em.find(Cashier.class, cashierId));
@@ -45,7 +43,6 @@ public class CashierDao implements CashierService {
 	
 	@Override
 	public Cashier getCashierById(Long cashierId) {
-		
 		EntityManager em = emf.createEntityManager();
 		return em.find(Cashier.class, cashierId);
 	}

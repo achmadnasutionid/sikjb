@@ -48,6 +48,6 @@ private ReportService reportService;
 	public String deleteReport(@PathVariable Long reportId) {
 		reportService.deleteReport(reportId);
 			return "redirect:/report";
-}
+	}
 }
 
