@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head lang="en"  th:include="fragment/header :: header">
-  </head>
-  <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top"  th:include="fragment/navigation :: navigation">
-  </nav>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head th:include="fragment/header :: header">
+    <title>Manager</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top"  th:include="fragment/navigation :: navigation"></nav>
     <div class="container">
-   
     <h1>Data Manager</h1>
-        <div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
             <a class="btn btn-success" href="/manager/create">Add New</a>
         </div>
         <br>
-    <!-- Logika nya, jika ada data pada tabel maka akan ditampilkan-->
     <div style="max-height: 700px; overflow: auto" th:if="${not #lists.isEmpty(manager)}" >
-     
      <table  id="t01" class="table table-striped">
     	<tr>
             <th style="text-align: center">#</th>
@@ -23,28 +20,20 @@
 			<th>Telephone</th>
             <th style="text-align: center">Opsi</th>
     	</tr>
-    	
-    	<!-- Banyak data nya array, maka menggunakan for each dari thymeleaf -->
-
          <tr th:each="managers : ${manager}">
              <td align="center"></td>
              <td th:text="${managers.name}"></td>
              <td th:text="${managers.address}"></td>
              <td th:text="${managers.telephone}"></td>
              <td align="center">
-                 <a class="btn btn-warning" th:href="${'/manager/edit/' +managers.getId()}">
-                     Detail
-                 </a>
-
-                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                     Delete
-                 </button>
+                 <a class="btn btn-warning" th:href="${'/manager/edit/' +managers.getId()}">Detail</a>
+                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
              </td>
              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                  <div class="modal-dialog" role="document">
                      <div class="modal-content">
                          <div class="modal-header">
-                             <h4>Are You sure You want to delete this item ?<h4>
+                             <h4>Are You sure You want to delete this item ?</h4>
                          </div>
                          <div class="modal-footer">
                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -54,24 +43,13 @@
                  </div>
              </div>
          </tr>
-    
     </table>
-
     </div>
-
-    </div><!-- /.container -->
-
-
-   
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-
+    </div>
 	<script th:src="@{/js/jquery.js}"></script>
 	<script th:src="@{/js/bootstrap.js}"></script>
-	
-  </body>
+</body>
 <footer>
-    <nav class="navbar navbar-inverse navbar-fixed-bottom"  th:include="fragment/footer :: footer">
-    </nav>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom"  th:include="fragment/footer :: footer"></nav>
 </footer>
 </html>

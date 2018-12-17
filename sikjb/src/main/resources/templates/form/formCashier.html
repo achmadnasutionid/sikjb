@@ -1,25 +1,15 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head lang="en"  th:include="fragment/header :: header">
-  </head>
-
-  <body>
-
-  <nav class="navbar navbar-inverse navbar-fixed-top"  th:include="fragment/navigation :: navigation">
-  </nav>
-
-
-
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="fragment/header :: header">
+    <title>Form Cashier</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top"  th:include="fragment/navigation :: navigation"></nav>
     <div class="container">
-
         <h1>Form Cashier</h1>
-        <!--Tambahkan sintaks-->
-
         <div class="row">
             <div class="col-sm-8">
-                <form class="form-horizontal" th:object="${cashier}"
-                      th:action="@{/cashier/create}" method="post">
+                <form class="form-horizontal" th:object="${cashier}" th:action="@{/cashier/create}" method="post">
                     <input type="hidden" th:field="*{id}"/>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Name:</label>
@@ -76,17 +66,11 @@
                 </form>
             </div>
         </div>
-
-    </div><!-- /.container -->
-   
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-
-	<script th:src="@{/js/jquery.js}"></script>
-	<script th:src="@{/js/bootstrap.js}"></script>
-  </body>
+    </div>
+</body>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
 <footer>
-    <nav class="navbar navbar-inverse navbar-fixed-bottom"  th:include="fragment/footer :: footer">
-    </nav>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom"  th:include="fragment/footer :: footer"></nav>
 </footer>
 </html>

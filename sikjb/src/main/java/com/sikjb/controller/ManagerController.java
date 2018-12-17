@@ -25,7 +25,6 @@ public class ManagerController {
         return "list/manager";
     }
 
-
     @RequestMapping(value = "/manager/create", method = RequestMethod.GET)
     public String showFormManager(Model model) {
         model.addAttribute("manager", new Manager());

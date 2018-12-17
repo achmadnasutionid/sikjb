@@ -71,7 +71,6 @@ public class Transaction {
 		this.date = date;
 	}
 
-
 	public Inventory getInventory() {
 		return inventory;
 	}

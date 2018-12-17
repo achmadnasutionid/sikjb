@@ -55,6 +55,4 @@ public class InventoryDao implements InventoryService {
 			EntityManager em = emf.createEntityManager();
 			return em.find(Inventory.class,inventoryId);
 		}
-		
-		
 }

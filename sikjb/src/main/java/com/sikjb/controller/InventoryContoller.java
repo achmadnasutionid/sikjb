@@ -12,8 +12,6 @@ import com.sikjb.service.InventoryService;
 
 @Controller
 public class InventoryContoller {
-
-	
 		
 		private InventoryService inventoryService;
 		

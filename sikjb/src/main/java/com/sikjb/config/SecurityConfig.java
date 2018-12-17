@@ -39,10 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	DataSource dataSource;
 
  	@Override
- 	protected void configure(HttpSecurity http) throws Exception
- 	{
-	 			http.csrf().disable()
-	 			.authorizeRequests()
+ 	protected void configure(HttpSecurity http) throws Exception {
+ 		http.csrf()
+				.disable()
+				.authorizeRequests()
 				.antMatchers("/", "/js/**", "/css/**").permitAll()
 	 			.antMatchers("/admin/**")
 				.hasRole("ADMIN")
@@ -66,11 +66,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 			.and()
 	 			.exceptionHandling()
 	 			.accessDeniedHandler(accessDeniedHandler);
- }
+ 	}
  
  	@Override
- 	protected void configure(AuthenticationManagerBuilder auth) throws Exception
- 	{
+ 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	 	auth.inMemoryAuthentication().withUser("admin").password("{noop}admin123").roles("ADMIN");
 	 	auth.inMemoryAuthentication().withUser("manager").password("{noop}manager123").roles("MANAGER");
 	 	auth.inMemoryAuthentication().withUser("cashier").password("{noop}cashier123").roles("CASHIER");
