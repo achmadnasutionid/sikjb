@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head lang="en">
     <title>Manager Koperasi</title>
     <!-- Bootstrap core CSS -->
@@ -46,7 +46,7 @@
     <div class="container">
    
     <h1>Data Manager</h1>
-        <div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
             <a class="btn btn-success" href="/manager/create">Add New</a>
         </div>
         <br>

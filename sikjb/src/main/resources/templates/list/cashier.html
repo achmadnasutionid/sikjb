@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head lang="en">
     <title>Cashier Koperasi</title>
     <!-- Bootstrap core CSS -->
@@ -49,7 +49,7 @@
     <h1>Data Cashier</h1>
 
 
-        <div>
+        <div sec:authorize="hasRole('ROLE_MANAGER')">
             <a class="btn btn-success" href="/cashier/create">Add New</a>
         </div>
         <br>
