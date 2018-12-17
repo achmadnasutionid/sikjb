@@ -20,10 +20,11 @@ public class ManagerController {
     }
 
     @RequestMapping("/manager")
-    public String showManagerList(Model model) {
+    public String showManagerListForManager(Model model) {
         model.addAttribute("manager", managerService.listManager());
         return "list/manager";
     }
+
 
     @RequestMapping(value = "/manager/create", method = RequestMethod.GET)
     public String showFormManager(Model model) {
