@@ -1,12 +1,8 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en"  th:include="fragment/header :: header">
-   </head>
+<head lang="en"  th:include="fragment/header :: header"></head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top"  th:include="fragment/navigation :: navigation">
-</nav>
-
+<nav class="navbar navbar-inverse navbar-fixed-top"  th:include="fragment/navigation :: navigation"></nav>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -48,9 +44,7 @@
             </form>
         </div>
     </div>
-</div><!-- /.container -->
-<!-- Bootstrap core JavaScript
-================================================== -->
+</div>
 <script th:src="@{/js/jquery.js}"></script>
 <script th:src="@{/js/bootstrap.js}"></script>
 </body>
@@ -58,7 +52,6 @@
 <br/>
 </body>
 <footer>
-    <nav class="navbar navbar-inverse navbar-fixed-bottom"  th:include="fragment/footer :: footer">
-    </nav>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom"  th:include="fragment/footer :: footer"></nav>
 </footer>
 </html>
