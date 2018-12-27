@@ -15,21 +15,19 @@
      <table id="t01" class="table table-striped">
     	<tr>
             <th style="text-align: center">#</th>
-            <th>Username</th>
     		<th>Name</th>
     		<th>Address</th>
-			<th>Telephone</th>
+			<th style="text-align: center">Telephone</th>
 			<th style="text-align: center">Opsi</th>
     	</tr>
     	<tr th:each="cashiers : ${cashier}">
             <td align="center"></td>
-            <td th:text="${cashiers.user.username}"></td>
     		<td th:text="${cashiers.name}"></td>
     		<td th:text="${cashiers.address}"></td>
-    		<td th:text="${cashiers.telephone}"></td>
+    		<td align="center" th:text="${cashiers.telephone}"></td>
     		<td align="center">
     		    <a class="btn btn-warning" th:href="${'/cashier/edit/' +cashiers.id}">Detail</a>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                <button sec:authorize="hasRole('ROLE_MANAGER')" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
             </td>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">

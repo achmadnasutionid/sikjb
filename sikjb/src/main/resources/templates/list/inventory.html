@@ -16,18 +16,18 @@
     	<tr>
             <th style="text-align: center">#</th>
     		<th>Name</th>
-    		<th>Stock</th>
-			<th>Price</th>
+    		<th style="text-align: center">Stock</th>
+			<th style="text-align: center">Price</th>
 			<th style="text-align: center;">Opsi</th>
     	</tr>
     	<tr th:each="inventorys : ${inventory}">
             <td align="center"></td>
     		<td th:text="${inventorys.name}"></td>
-    		<td th:text="${inventorys.stock}"></td>
-    		<td th:text="${inventorys.price}"></td>
+    		<td align="center" th:text="${inventorys.stock}"></td>
+    		<td align="center" th:text="${inventorys.price}"></td>
     		<td align="center">
     		    <a class="btn btn-warning" th:href="${'/inventory/edit/' +inventorys.id}">Detail</a>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                <button sec:authorize="hasRole('ROLE_CASHIER')" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
     		</td>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">

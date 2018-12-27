@@ -7,22 +7,20 @@
     <div class="container">
     <h1>Data Transaction</h1>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" sec:authorize="hasRole('ROLE_CASHIER')">Add New</button>
+        <br>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Name:</label>
-                            <div class="col-sm-10">
-                                <!--&lt;!&ndash;<select class="form-control" th:field="*{name}">&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<option th:value="'Income'" th:text="Income"></option>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<option th:value="'Outcome'" th:text="Outcome"></option>&ndash;&gt;-->
-                                <!--</select>-->
+                            <div class="well-lg">
+                                <input type="number" id="id" value="${id}" class="form-control" placeholder="Input Inventory Id please .."/>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a class="btn btn-primary" href="" onclick="this.href='/transaction/create/'+document.getElementById('id').value">New Transaction</a>
                     </div>
                 </div>
             </div>
@@ -31,27 +29,34 @@
     <div th:if="${not #lists.isEmpty(transaction)}">
      <table id="t01" class="table table-striped">
     	<tr>
-            <th></th>
-    		<th>Name</th>
-    		<th>Income</th>
-			<th>Outcome</th> 
-			<th>Date</th> 
-			<th>Opsi</th>
+            <th style="text-align: center">#</th>
+    		<th style="text-align: center">Income</th>
+			<th style="text-align: center">Outcome</th>
+			<th style="text-align: center">Date</th>
+			<th style="text-align: center">Opsi</th>
     	</tr>
     	<tr th:each="transactions : ${transaction}">
-            <td></td>
-    		<td th:text="${transactions.name}"></td>
-    		<td th:text="${transactions.income}"></td>
-    		<td th:text="${transactions.outcome}"></td>
-    		<td th:text="${transactions.date}"></td>
-    		<td>
-    		    <a th:href="${'/transaction/edit/' +transactions.id}">
-                    <span class="glyphicon glyphicon-edit"></span>
-                </a>
-                <a th:href="${'/transaction/delete/' +transactions.getId()}" onclick="return confirm('Are you sure you want to delete this item ?');">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </a>
-    		</td>
+            <td align="center"></td>
+    		<td align="center" th:text="${transactions.income}"></td>
+    		<td align="center" th:text="${transactions.outcome}"></td>
+    		<td align="center" th:text="${transactions.date}"></td>
+            <td align="center">
+                <a class="btn btn-warning" th:href="${'/transaction/edit/' +transactions.getId()}">Detail</a>
+                <button sec:authorize="hasRole('ROLE_CASHIER')" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal1">Delete</button>
+            </td>
+            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4>Are You sure You want to delete this item ?</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a class="btn btn-primary" th:href="${'/transaction/delete/' +transactions.id}">Yes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </tr>
     </table>
     </div>

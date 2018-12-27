@@ -17,17 +17,17 @@
             <th style="text-align: center">#</th>
     		<th>Name</th>
     		<th>Address</th>
-			<th>Telephone</th>
+			<th style="text-align: center">Telephone</th>
             <th style="text-align: center">Opsi</th>
     	</tr>
          <tr th:each="managers : ${manager}">
              <td align="center"></td>
              <td th:text="${managers.name}"></td>
              <td th:text="${managers.address}"></td>
-             <td th:text="${managers.telephone}"></td>
+             <td align="center" th:text="${managers.telephone}"></td>
              <td align="center">
                  <a class="btn btn-warning" th:href="${'/manager/edit/' +managers.getId()}">Detail</a>
-                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                 <button sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
              </td>
              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                  <div class="modal-dialog" role="document">

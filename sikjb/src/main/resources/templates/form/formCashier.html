@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head th:include="fragment/header :: header">
     <title>Form Cashier</title>
 </head>
@@ -57,7 +57,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div sec:authorize="hasRole('ROLE_MANAGER')" class="form-group">
                         <label class="col-sm-2 control-label"></label>
                         <div class="col-sm-10">
                             <button type="submit" class="btn btn-primary">Save</button>
