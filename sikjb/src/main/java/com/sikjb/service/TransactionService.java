@@ -12,5 +12,7 @@ public interface TransactionService {
 
 	 Transaction getTransactionById(Long transactionId);
 	 
-	  void deleteTransactionById(Long transactionId);
+	 void deleteTransactionById(Long transactionId);
+
+	 List<Transaction> listTransactionForReport(String firstDate, String lastDate);
 }

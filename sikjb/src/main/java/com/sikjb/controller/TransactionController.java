@@ -47,9 +47,10 @@ public class TransactionController {
 				return "redirect:/transaction";
 		}
 		
-		@RequestMapping(value = "/transaction/edit/{transactionId}", method = RequestMethod.GET)
-		public String showFormEditTransaction(@PathVariable Long transactionId, Model model) {
+		@RequestMapping(value = "/transaction/edit/{transactionId}/{inventoryId}", method = RequestMethod.GET)
+		public String showFormEditTransaction(@PathVariable Long transactionId, @PathVariable Long inventoryId, Model model) {
 				model.addAttribute("transaction", transactionService.getTransactionById(transactionId));
+				model.addAttribute("inventory", inventoryService.getInventoryById(inventoryId));
 				return "form/formTransaction";
 		}
 		

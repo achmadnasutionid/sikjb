@@ -13,8 +13,8 @@ import com.sikjb.service.ReportService;
 
 @Service
 public class ReportDao implements ReportService{
-	
-private EntityManagerFactory emf;
+
+	private EntityManagerFactory emf;
 	
 	@Autowired
 	public void setEmf(EntityManagerFactory emf) {

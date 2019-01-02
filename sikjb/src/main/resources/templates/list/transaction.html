@@ -41,7 +41,7 @@
     		<td align="center" th:text="${transactions.outcome}"></td>
     		<td align="center" th:text="${transactions.date}"></td>
             <td align="center">
-                <a class="btn btn-warning" th:href="${'/transaction/edit/' +transactions.getId()}">Detail</a>
+                <a class="btn btn-warning" th:href="${'/transaction/edit/' +transactions.getId() + '/' + transactions.inventory.id}">Detail</a>
                 <button sec:authorize="hasRole('ROLE_CASHIER')" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal1">Delete</button>
             </td>
             <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

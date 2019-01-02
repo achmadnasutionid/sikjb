@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.apache.tomcat.jni.Local;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -14,15 +16,21 @@ public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	
-	private String name;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 	
-	private Long income;
-	
-	private Long outcome;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate firstDate;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate lastDate;
+
+	private int income;
+
+	private int outcome;
+
+	private String description;
 
 	public Long getId() {
 		return Id;
@@ -32,13 +40,6 @@ public class Report {
 		Id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public LocalDate getDate() {
 		return date;
@@ -48,22 +49,45 @@ public class Report {
 		this.date = date;
 	}
 
-	public Long getIncome() {
+	public LocalDate getFirstDate() {
+		return firstDate;
+	}
+
+	public void setFirstDate(LocalDate firstDate) {
+		this.firstDate = firstDate;
+	}
+
+	public LocalDate getLastDate() {
+		return lastDate;
+	}
+
+	public void setLastDate(LocalDate lastDate) {
+		this.lastDate = lastDate;
+	}
+
+	public int getIncome() {
 		return income;
 	}
 
-	public void setIncome(Long income) {
+	public void setIncome(int income) {
 		this.income = income;
 	}
 
-	public Long getOutcome() {
+	public int getOutcome() {
 		return outcome;
 	}
 
-	public void setOutcome(Long outcome) {
+	public void setOutcome(int outcome) {
 		this.outcome = outcome;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }
 	
 	

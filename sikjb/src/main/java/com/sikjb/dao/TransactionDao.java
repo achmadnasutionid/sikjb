@@ -1,5 +1,6 @@
 package com.sikjb.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -48,6 +49,12 @@ public class TransactionDao implements TransactionService {
         em.getTransaction().begin();
         em.remove(em.find(Transaction.class, transactionId));
         em.getTransaction().commit();
+    }
+
+    @Override
+    public List<Transaction> listTransactionForReport(String firstDate, String lastDate) {
+        EntityManager em = emf.createEntityManager();
+        return em.createQuery("from Transaction where date>='"+firstDate+"' and date<='"+lastDate+"'", Transaction.class).getResultList();
     }
 
 }

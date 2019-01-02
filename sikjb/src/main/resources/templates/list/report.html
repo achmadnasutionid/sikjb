@@ -7,32 +7,64 @@
   <nav class="navbar navbar-inverse navbar-fixed-top"  th:include="fragment/navigation :: navigation"></nav>
     <div class="container">
     <h1>Data Report</h1>
-        <div sec:authorize="hasRole('ROLE_CASHIER')">
-            <a class="btn btn-success" href="/report/create">Add New</a>
-        </div>
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" sec:authorize="hasRole('ROLE_CASHIER')">Add New</button>
+		<br>
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">From:</label>
+							<div class="well-lg">
+								<input type="date" id="firstDate" value="${firsDate}" class="form-control"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Until:</label>
+							<div class="well-lg">
+								<input type="date" id="lastDate" value="${lastDate}" class="form-control"/>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<a class="btn btn-primary" href="" onclick="this.href='/report/create/'+document.getElementById('firstDate').value+'/'+document.getElementById('lastDate').value">New Report</a>
+					</div>
+				</div>
+			</div>
+		</div>
         <br>
     <div th:if="${not #lists.isEmpty(report)}">
-		<table class="table table-striped">
+		<table id="t01" class="table table-striped">
     		<tr>
-    			<th>Name</th>
-    			<th>Date</th>
-    			<th>Income</th>
-				<th>Outcome</th>
-				<th></th>
+				<th style="text-align: center">#</th>
+    			<th style="text-align: center">Date</th>
+    			<th style="text-align: center">Income</th>
+				<th style="text-align: center">Outcome</th>
+				<th style="text-align: center">Opsi</th>
     		</tr>
     		<tr th:each="reports : ${report}">
-    			<td th:text="${reports.name}"></td>
-    			<td th:text="${reports.date}"></td>
-    			<td th:text="${reports.income}"></td>
-    			<td th:text="${reports.outcome}"></td>
-    			<td>
-    				<a th:href="${'/report/edit/' +reports.id}">
-						<span class="glyphicon glyphicon-edit"></span>
-					</a>
-    				<a th:href="${'/report/delete/' +reports.getId()}" onclick="return confirm('Are you sure you want to delete this item ?');">
-						<span class="glyphicon glyphicon-remove"></span>
-					</a>
+				<td align="center"></td>
+    			<td align="center" th:text="${reports.date}"></td>
+    			<td align="center" th:text="${reports.income}"></td>
+    			<td align="center" th:text="${reports.outcome}"></td>
+    			<td align="center">
+					<a class="btn btn-warning" th:href="${'/report/edit/' +reports.id}">Detail</a>
+					<button sec:authorize="hasRole('ROLE_CASHIER')" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal1">Delete</button>
     			</td>
+				<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4>Are You sure You want to delete this item ?</h4>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<a class="btn btn-primary" th:href="${'/report/delete/' +reports.id}">Yes</a>
+							</div>
+						</div>
+					</div>
+				</div>
     		</tr>
     	</table>
 	</div>

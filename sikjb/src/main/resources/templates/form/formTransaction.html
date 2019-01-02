@@ -9,34 +9,35 @@
         <h1>Form Transaction</h1>
         <div class="row">
             <div class="col-sm-8">
-                <form class="form-horizontal" th:object="${transaction}" th:action="@{/transaction/create}" method="post">
-                    <input type="hidden" th:field="*{id}"/>
+                <form class="form-horizontal" th:action="@{/transaction/create}" method="post">
+                    <input type="hidden" name="id" th:value="${transaction.id}"/>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Income:</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" th:field="*{income}"/>
+                            <input type="number" name="income" class="form-control" th:value="${transaction.income}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Outcome:</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" th:field="*{outcome}"/>
+                            <input type="number" name="outcome" class="form-control" th:value="${transaction.outcome}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Date:</label>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" th:field="*{date}"/>
+                            <input type="date" name="date" class="form-control" th:value="${transaction.date}"/>
                         </div>
                     </div>
-                    <input type="hidden" th:field="*{inventory.id}"/>
-                    <input type="hidden" th:field="*{inventory.name}"/>
+                    <input type="hidden" name="inventory.id" th:value="${inventory.id}"/>
+                    <input type="hidden" name="inventory.name" th:value="${inventory.name}"/>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Quantity:</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" th:field="*{inventory.stock}"/>
+                            <input type="number" name="inventory.stock" class="form-control" th:value="${inventory.stock}"/>
                         </div>
                     </div>
+                    <input type="hidden" name="inventory.price" th:value="${inventory.price}"/>
                     <div class="form-group">
                         <label class="col-sm-2 control-label"></label>
                         <div class="col-sm-10">

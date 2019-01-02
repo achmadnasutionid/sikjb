@@ -18,16 +18,17 @@ public class Transaction {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
-	private Long income;
+	private int income;
 	
-	private Long outcome;
+	private int outcome;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Inventory inventory;
-	
+
+
 	public Long getId() {
 		return Id;
 	}
@@ -36,19 +37,19 @@ public class Transaction {
 		Id = id;
 	}
 
-	public Long getIncome() {
+	public int getIncome() {
 		return income;
 	}
 
-	public void setIncome(Long income) {
+	public void setIncome(int income) {
 		this.income = income;
 	}
 
-	public Long getOutcome() {
+	public int getOutcome() {
 		return outcome;
 	}
 
-	public void setOutcome(Long outcome) {
+	public void setOutcome(int outcome) {
 		this.outcome = outcome;
 	}
 
